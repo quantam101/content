@@ -1,0 +1,25 @@
+title: ProfitEngine Content
+description: AI-generated articles on passive income, SaaS tools, and online business
+baseurl: "/content"
+url: "https://quantam101.github.io"
+theme: minima
+
+# Build settings
+markdown: kramdown
+permalink: /posts/:title/
+
+# Exclude files
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+
+# Default front matter
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "ProfitEngine AI"
