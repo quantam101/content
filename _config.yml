@@ -1,12 +1,18 @@
 title: ProfitEngine Content
 description: AI-generated articles on passive income, SaaS tools, and online business
-baseurl: "/content"
-url: "https://quantam101.github.io"
+baseurl: \"/content\"
+url: \"https://quantam101.github.io\"
 theme: minima
 
 # Build settings
 markdown: kramdown
 permalink: /posts/:title/
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
 
 # Exclude files
 exclude:
@@ -15,11 +21,23 @@ exclude:
   - node_modules
   - vendor
 
+# Pagination
+paginate: 10
+paginate_path: \"/page/:num/\"
+
 # Default front matter
 defaults:
   - scope:
-      path: ""
-      type: "posts"
+      path: \"\"
+      type: \"posts\"
     values:
-      layout: "post"
-      author: "ProfitEngine AI"
+      layout: \"post\"
+      author: \"ProfitEngine AI\"
+      image: \"https://quantam101.github.io/content/assets/og-default.png\"
+
+# SEO
+twitter:
+  username: profitengine
+social:
+  name: ProfitEngine
+  links: []
