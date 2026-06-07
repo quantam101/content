@@ -13,6 +13,7 @@ plugins:
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
+  - jekyll-paginate
 
 # Exclude files
 exclude:
@@ -28,7 +29,7 @@ paginate_path: /page/:num/
 # Default front matter
 defaults:
   - scope:
-      path: 
+      path: ""
       type: posts
     values:
       layout: post
