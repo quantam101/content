@@ -1,0 +1,32 @@
+name: Jekyll production build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+
+      - name: Build site
+        run: bundle exec jekyll build --strict_front_matter
+
+      - name: Validate generated site
+        run: |
+          test -f _site/index.html
+          test -f _site/sitemap.xml
+          test -f _site/feed.xml
