@@ -1,7 +1,10 @@
 title: ProfitEngine Content
 description: AI-generated articles on passive income, SaaS tools, and online business
 baseurl: /content
-url: https://quantam101.github.io
+# Canonical domain: articles are served at www.alreadyherellc.com/content/*
+# via a Vercel rewrite in already-here-llc. The github.io copy canonicalizes
+# to the real domain so search authority consolidates there.
+url: https://www.alreadyherellc.com
 theme: minima
 
 # Build settings
@@ -34,7 +37,7 @@ defaults:
     values:
       layout: post
       author: ProfitEngine AI
-      image: https://quantam101.github.io/content/assets/og-default.png
+      image: https://www.alreadyherellc.com/content/assets/og-default.png
 
 # SEO
 twitter:
