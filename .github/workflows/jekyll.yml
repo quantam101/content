@@ -15,6 +15,20 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Block automated rewrites of published posts
+        if: github.event_name == 'push'
+        run: |
+          if git rev-parse HEAD~1 >/dev/null 2>&1; then
+            rewrites="$(git diff --name-status HEAD~1 HEAD -- 'posts/*.md' | awk '$1 ~ /^M/ {print}')"
+            if [ -n "$rewrites" ]; then
+              echo "Published post rewrite blocked. Create a new reviewed post or set ALLOW_CONTENT_REWRITE=true only for an intentional manual correction."
+              echo "$rewrites"
+              exit 1
+            fi
+          fi
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
