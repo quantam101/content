@@ -29,7 +29,7 @@ To create an Oracle Cloud account, follow these steps:
 One of the simplest side projects you can host with OCI Always Free is a static website. You can use Object Storage to store your website's files, and then use the Oracle Cloud CDN to distribute your website to users around the world. To host a static website with OCI Always Free, follow these steps:
 1. Create a new bucket in Object Storage and upload your website's files to it.
 2. Create a new CDN distribution and specify the bucket as the origin.
-3. Configure the CDN distribution to use a custom domain name, such as example.com.
+3. Configure the CDN distribution to use a custom domain name, such as your-domain.com.
 4. Test your website by accessing it through the custom domain name.
 
 ## Hosting a Dynamic Website with OCI Always Free

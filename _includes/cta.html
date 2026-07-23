@@ -1,0 +1,123 @@
+{% assign tags_lower = page.tags | join: ' ' | downcase %}
+{% assign title_lower = page.title | downcase %}
+{% assign body_lower = content | downcase %}
+
+{% assign is_field = false %}
+{% assign is_chatbot = false %}
+{% assign is_hosting = false %}
+{% assign is_seo = false %}
+{% assign is_passive = false %}
+
+{% if tags_lower contains 'field service' or tags_lower contains 'msp' or tags_lower contains 'phoenix' or tags_lower contains 'arizona' or tags_lower contains 'network' or tags_lower contains 'cabling' or tags_lower contains 'voip' or tags_lower contains 'infrastructure' or tags_lower contains 'assessment' or tags_lower contains 'smart hands' or title_lower contains 'phoenix' or title_lower contains 'arizona' or title_lower contains 'network' or title_lower contains 'cabling' or title_lower contains 'voip' or title_lower contains 'infrastructure' or title_lower contains 'assessment' or title_lower contains 'smart hands' or title_lower contains 'field service' %}
+  {% assign is_field = true %}
+{% elsif tags_lower contains 'chatbot' or tags_lower contains 'receptionist' or tags_lower contains 'customer support' or tags_lower contains 'ai agent' or title_lower contains 'chatbot' or title_lower contains 'receptionist' or title_lower contains 'customer support' %}
+  {% assign is_chatbot = true %}
+{% elsif tags_lower contains 'hosting' or tags_lower contains 'vps' or tags_lower contains 'server' or tags_lower contains 'cloud' or title_lower contains 'hosting' or title_lower contains 'vps' or title_lower contains 'cloud' %}
+  {% assign is_hosting = true %}
+{% elsif tags_lower contains 'seo' or tags_lower contains 'blogging' or tags_lower contains 'content' or title_lower contains 'seo' or title_lower contains 'blogging' or title_lower contains 'programmatic' %}
+  {% assign is_seo = true %}
+{% elsif tags_lower contains 'passive income' or tags_lower contains 'digital product' or tags_lower contains 'automation' or tags_lower contains 'ai tools' or title_lower contains 'passive income' or title_lower contains 'digital product' or title_lower contains 'automation' %}
+  {% assign is_passive = true %}
+{% endif %}
+
+<div class="post-cta" style="margin-top: 2rem; padding: 1.5rem; border: 1px solid #e0e0e0; border-radius: 8px; background: #fafafa;">
+  <p class="ftc-note" style="font-size: 0.85rem; color: #666; margin-bottom: 1rem;">
+    <em>Disclosure: Some links below are affiliate or product links. We may earn a commission if you purchase, at no extra cost to you.</em>
+  </p>
+
+  {% if is_field %}
+    <h3>Need on-site help in Phoenix?</h3>
+    <p>Already Here LLC provides professional field assessments and smart-hands support for Arizona businesses. Book online and we’ll confirm your visit within one business day.</p>
+    <ul>
+      <li><a href="https://alreadyhere.gumroad.com/l/rrnqyql" target="_blank" rel="sponsored">Phoenix Network Health Assessment — $750</a></li>
+      <li><a href="https://alreadyhere.gumroad.com/l/fyaryu" target="_blank" rel="sponsored">Arizona Infrastructure Assessment — $1,500</a></li>
+      <li><a href="https://alreadyhere.gumroad.com/l/iezxvf" target="_blank" rel="sponsored">Smart Hands Half-Day Block — $400</a></li>
+    </ul>
+    <p>Questions? <a href="https://www.alreadyherellc.com/contact">Contact us</a> or <a href="https://www.alreadyherellc.com/dispatch">open a dispatch request</a>.</p>
+
+  {% elsif is_chatbot %}
+    <h3>Get a 24/7 AI receptionist for your business</h3>
+    <p>We build, train, and deploy AI chatbots that capture leads, answer FAQs, and route urgent requests — starting at $500 setup + $99/mo.</p>
+    <p><a href="https://www.alreadyherellc.com/ai-receptionist" target="_blank">Request an AI receptionist demo</a> or <a href="https://www.alreadyherellc.com/contact">contact sales</a>.</p>
+
+  {% elsif is_hosting %}
+    <h3>Recommended hosting & cloud tools</h3>
+    <ul>
+      <li><a href="https://www.hostinger.com/web-hosting?REFERRALCODE=ALREADYHERE" target="_blank" rel="sponsored">Hostinger — start at $2.99/month</a></li>
+      <li><a href="https://m.do.co/c/alreadyhere20" target="_blank" rel="sponsored">DigitalOcean — $200 free credits</a></li>
+      <li><a href="https://www.alreadyherellc.com/services-catalog">Already Here LLC IT services for Arizona businesses</a></li>
+    </ul>
+
+  {% elsif is_seo %}
+    <h3>Grow your site faster</h3>
+    <ul>
+      <li><a href="https://alreadyhere.gumroad.com/l/azdev" target="_blank" rel="sponsored">Programmatic SEO Starter Kit — $29</a></li>
+      <li><a href="https://alreadyhere.gumroad.com/l/grsiib" target="_blank" rel="sponsored">AI Business Prompt Pack — $27</a></li>
+      <li><a href="https://alreadyhere.gumroad.com/l/fsbseb" target="_blank" rel="sponsored">Complete Automation Bundle — all tools</a></li>
+    </ul>
+
+  {% elsif is_passive %}
+    <h3>Ready to build automated income?</h3>
+    <p>These products include the exact prompts, templates, and systems we use to run ProfitEngine and Already Here LLC.</p>
+    <ul>
+      <li><a href="https://alreadyhere.gumroad.com/l/fsbseb" target="_blank" rel="sponsored">Complete Automation Bundle — all 5 toolkits</a></li>
+      <li><a href="https://alreadyhere.gumroad.com/l/grsiib" target="_blank" rel="sponsored">AI Business Prompt Pack — $27</a></li>
+      <li><a href="https://alreadyhere.gumroad.com/l/dyiyh" target="_blank" rel="sponsored">Social Media Content Engine — $17</a></li>
+      <li><a href="https://alreadyhere.gumroad.com/l/zwztrcc" target="_blank" rel="sponsored">POD Design Prompt Bundle — $22</a></li>
+      <li><a href="https://alreadyhere.gumroad.com/l/bxwrdt" target="_blank" rel="sponsored">Real Estate Copywriting Kit — $19</a></li>
+      <li><a href="https://alreadyhere.gumroad.com/l/ujctf" target="_blank" rel="sponsored">Email List Gold Mine — free/pay-what-you-want</a></li>
+    </ul>
+
+  {% else %}
+    <h3>Tools & services mentioned</h3>
+    <ul>
+      <li><a href="https://alreadyhere.gumroad.com/l/fsbseb" target="_blank" rel="sponsored">Complete Automation Bundle</a></li>
+      <li><a href="https://www.hostinger.com/web-hosting?REFERRALCODE=ALREADYHERE" target="_blank" rel="sponsored">Hostinger — $2.99/month</a></li>
+      <li><a href="https://m.do.co/c/alreadyhere20" target="_blank" rel="sponsored">DigitalOcean — $200 free credits</a></li>
+      <li><a href="https://www.amazon.com?tag=alreadyhere-20" target="_blank" rel="sponsored">Amazon tools & gear</a></li>
+    </ul>
+  {% endif %}
+
+  <h4>Stay in the loop</h4>
+  <p>Get one weekly note on AI, automation, and revenue systems — no spam, unsubscribe anytime.</p>
+  <form class="cta-newsletter" action="https://www.alreadyherellc.com/api/newsletter-subscribe" method="POST" style="display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center;">
+    <input type="email" name="email" placeholder="Enter your email" required style="padding:0.5rem;border:1px solid #ccc;border-radius:4px;min-width:220px;">
+    <button type="submit" style="padding:0.5rem 1rem;background:#1a1a2e;color:#fff;border:none;border-radius:4px;cursor:pointer;">Subscribe</button>
+    <span class="cta-newsletter-status" style="width:100%;font-size:0.9rem;color:#2a7a2a;"></span>
+  </form>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var form = document.querySelector('.cta-newsletter');
+    if (!form) return;
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var status = form.querySelector('.cta-newsletter-status');
+      var email = form.querySelector('input[name="email"]').value.trim();
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        status.textContent = 'Please enter a valid email.';
+        status.style.color = '#a00';
+        return;
+      }
+      fetch(form.action, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'email=' + encodeURIComponent(email)
+      }).then(function(r) { return r.json(); })
+        .then(function(data) {
+          if (data.ok) {
+            status.textContent = 'Thanks! Check your inbox for confirmation.';
+            status.style.color = '#2a7a2a';
+            form.querySelector('input[name="email"]').value = '';
+          } else {
+            status.textContent = data.error || 'Subscription failed. Try again.';
+            status.style.color = '#a00';
+          }
+        }).catch(function() {
+          status.textContent = 'Subscription service unavailable. Please try on our homepage.';
+          status.style.color = '#a00';
+        });
+    });
+  });
+</script>
