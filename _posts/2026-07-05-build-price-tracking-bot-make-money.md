@@ -38,7 +38,7 @@ Here is an example of how to use Python and BeautifulSoup to extract price data 
 import requests
 from bs4 import BeautifulSoup
 
-url = 'https://example.com/product'
+url = 'https://www.your-domain.com/product'
 response = requests.get(url)
 soup = BeautifulSoup(response.content, 'html.parser')
 price = soup.find('span', {'class': 'price'}).text
