@@ -9,7 +9,7 @@ theme: minima
 
 # Build settings
 markdown: kramdown
-permalink: /posts/:title/
+permalink: /posts/:year/:month/:day/:title/
 
 # Plugins
 plugins:
