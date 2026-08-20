@@ -1,7 +1,7 @@
 ---
 title: "AI Chatbot Services for Chicago, IL Businesses (2026)"
 description: "Find the best AI chatbot Chicago providers in Chicago, IL. Curated by AI, updated 2026."
-date: "2026-08-19"
+date: "2026-08-20"
 keywords: ["AI chatbot Chicago", "Chicago ai-chatbots", "Chicago IL"]
 schema: |
   {
