@@ -1,7 +1,7 @@
 ---
 title: "Best Roofers in Los Angeles, CA — Top-Rated Roofing Companies (2026)"
 description: "Find the best roofers Los Angeles providers in Los Angeles, CA. Curated by AI, updated 2026."
-date: "2026-08-20"
+date: "2026-08-21"
 keywords: ["roofers Los Angeles", "Los Angeles roofers", "Los Angeles CA"]
 schema: |
   {
