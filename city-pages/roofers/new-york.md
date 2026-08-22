@@ -1,7 +1,7 @@
 ---
 title: "Best Roofers in New York, NY — Top-Rated Roofing Companies (2026)"
 description: "Find the best roofers New York providers in New York, NY. Curated by AI, updated 2026."
-date: "2026-08-21"
+date: "2026-08-22"
 keywords: ["roofers New York", "New York roofers", "New York NY"]
 schema: |
   {
