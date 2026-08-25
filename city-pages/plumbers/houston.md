@@ -1,7 +1,7 @@
 ---
 title: "Best Plumbers in Houston, TX — Licensed & Insured (2026)"
 description: "Find the best plumbers Houston providers in Houston, TX. Curated by AI, updated 2026."
-date: "2026-08-24"
+date: "2026-08-25"
 keywords: ["plumbers Houston", "Houston plumbers", "Houston TX"]
 schema: |
   {
