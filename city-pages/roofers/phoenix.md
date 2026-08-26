@@ -1,7 +1,7 @@
 ---
 title: "Best Roofers in Phoenix, AZ — Top-Rated Roofing Companies (2026)"
 description: "Find the best roofers Phoenix providers in Phoenix, AZ. Curated by AI, updated 2026."
-date: "2026-08-25"
+date: "2026-08-26"
 keywords: ["roofers Phoenix", "Phoenix roofers", "Phoenix AZ"]
 schema: |
   {
