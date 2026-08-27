@@ -1,7 +1,7 @@
 ---
 title: "Best Plumbers in New York, NY — Licensed & Insured (2026)"
 description: "Find the best plumbers New York providers in New York, NY. Curated by AI, updated 2026."
-date: "2026-08-26"
+date: "2026-08-27"
 keywords: ["plumbers New York", "New York plumbers", "New York NY"]
 schema: |
   {
