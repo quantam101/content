@@ -1,0 +1,14 @@
+{%- comment -%}
+  Standard Google Analytics 4 (gtag.js) snippet. head.html includes this ONLY
+  when `jekyll.environment == 'production'` AND `site.google_analytics` is set,
+  so it is inert until a real measurement ID is configured. No ID is hardcoded
+  here — set `google_analytics: G-XXXXXXXXXX` in _config.yml to activate.
+  This file exists so that enabling analytics never breaks the production build.
+{%- endcomment -%}
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '{{ site.google_analytics }}');
+</script>

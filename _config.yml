@@ -7,6 +7,11 @@ baseurl: /content
 url: https://www.alreadyherellc.com
 theme: minima
 
+# Analytics: set a real GA4 measurement ID to activate site-wide tracking.
+# head.html loads _includes/google-analytics.html only in production AND only
+# when this key is present, so it stays inert until a real ID is set here.
+# google_analytics: G-XXXXXXXXXX   # <- replace with the real ID, then uncomment
+
 # Build settings
 markdown: kramdown
 permalink: /posts/:title/
