@@ -43,6 +43,13 @@ defaults:
       layout: post
       author: ProfitEngine AI
       image: https://www.alreadyherellc.com/content/assets/og-default.png
+  # city-pages/* local-SEO landers had no layout at all (bare markdown, no <head>,
+  # schema JSON-LD never emitted). Give them the city layout so they get full SEO
+  # head tags, canonical, analytics, and their structured data.
+  - scope:
+      path: "city-pages"
+    values:
+      layout: city
 
 # SEO
 twitter:
