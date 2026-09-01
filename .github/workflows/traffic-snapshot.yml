@@ -17,7 +17,11 @@ on:
 
 permissions:
   contents: write
-  administration: read   # the traffic API requires this on GITHUB_TOKEN
+# NOTE: the traffic API needs "Administration: read", which the built-in
+# GITHUB_TOKEN cannot be granted (it is not a valid GITHUB_TOKEN permission key).
+# Create a fine-grained PAT (this content repo, permission Administration: read)
+# or a classic PAT (repo scope), add it as the secret TRAFFIC_PAT, and this job
+# uses it automatically. Until then the run fails fast (committing nothing).
 
 concurrency:
   group: traffic-snapshot
@@ -32,7 +36,7 @@ jobs:
 
       - name: Fetch and record traffic
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.TRAFFIC_PAT || github.token }}
           REPO: ${{ github.repository }}
         run: |
           set -euo pipefail
