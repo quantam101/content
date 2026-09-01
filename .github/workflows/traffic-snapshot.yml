@@ -1,0 +1,74 @@
+name: Traffic Snapshot
+
+# GitHub's traffic API only retains the last 14 days. This job snapshots it
+# daily and commits the result, building a permanent traffic history — a real,
+# zero-credential analytics source. It also records referrers (where visitors
+# come from) and top paths, which is the signal that matters for distribution.
+#
+# The built-in GITHUB_TOKEN has push access to this repo, which is what the
+# traffic API requires. If a snapshot ever 403s, replace GH_TOKEN below with a
+# fine-grained PAT that has "Administration: read" on this repo (secret
+# TRAFFIC_PAT), i.e. GH_TOKEN: ${{ secrets.TRAFFIC_PAT }}.
+
+on:
+  schedule:
+    - cron: '20 6 * * *'   # daily 06:20 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: traffic-snapshot
+  cancel-in-progress: false
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch and record traffic
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          today="$(date -u +%F)"
+          mkdir -p analytics/daily
+          api() {
+            curl -sf -H "Authorization: Bearer $GH_TOKEN" \
+                 -H "Accept: application/vnd.github+json" \
+                 "https://api.github.com/repos/$REPO/traffic/$1"
+          }
+          views="$(api views)"
+          clones="$(api clones)"
+          paths="$(api popular/paths)"
+          referrers="$(api popular/referrers)"
+
+          jq -n \
+            --argjson views "$views" \
+            --argjson clones "$clones" \
+            --argjson paths "$paths" \
+            --argjson referrers "$referrers" \
+            --arg captured_at "$(date -u +%FT%TZ)" \
+            '{captured_at:$captured_at, views:$views, clones:$clones, popular_paths:$paths, referrers:$referrers}' \
+            > "analytics/daily/$today.json"
+
+          # Rolling latest + a flat human-readable summary line log.
+          cp "analytics/daily/$today.json" analytics/latest.json
+          v=$(echo "$views" | jq -r '.count // 0'); vu=$(echo "$views" | jq -r '.uniques // 0')
+          printf '%s\tviews=%s\tunique_visitors=%s\ttop_referrer=%s\n' \
+            "$today" "$v" "$vu" "$(echo "$referrers" | jq -r '.[0].referrer // "none"')" \
+            >> analytics/history.tsv
+
+          echo "### Traffic snapshot $today" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Views (14d window): $v  |  Unique visitors: $vu" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Top referrer: $(echo "$referrers" | jq -r '.[0].referrer // "none"')" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Commit snapshot
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore(analytics): traffic snapshot"
+          file_pattern: "analytics/**"
