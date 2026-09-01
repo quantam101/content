@@ -3,6 +3,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  {%- comment -%} Google Search Console HTML-tag verification (set in _config.yml). {%- endcomment -%}
+  {%- if site.google_site_verification -%}
+  <meta name="google-site-verification" content="{{ site.google_site_verification }}">
+  {%- endif -%}
+
   {%- assign page_title = page.title | default: site.title -%}
   {%- assign page_description = page.description | default: page.excerpt | default: site.description | strip_html | strip_newlines | normalize_whitespace | truncate: 160 -%}
   {%- assign canonical_url = page.url | replace: 'index.html', '' | absolute_url | replace: 'https://alreadyherellc.com', 'https://www.alreadyherellc.com' -%}
