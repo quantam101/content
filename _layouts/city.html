@@ -1,0 +1,25 @@
+---
+layout: default
+---
+{%- comment -%}
+  Layout for the city-pages/* local-SEO landers. Before this, those pages had NO
+  layout: they rendered as bare markdown with no <head>, no title/description/OG
+  tags, no canonical, and their `schema:` JSON-LD front matter was never emitted —
+  crippling the exact SEO they exist for. Assigned via _config.yml defaults on the
+  `city-pages` path scope, so all 25 pages (and future ones) are covered from here.
+
+  `layout: default` pulls in _includes/head.html (title, description, canonical,
+  OpenGraph/Twitter, analytics) and the site chrome. This layout additionally
+  emits the page's LocalBusiness JSON-LD. The pages keep their own inline service
+  CTA, which is geography/vertical-correct — no owned-product block is forced on.
+{%- endcomment -%}
+{%- if page.schema -%}
+<script type="application/ld+json">
+{{ page.schema }}
+</script>
+{%- endif -%}
+<article class="city-page h-entry" itemscope itemtype="http://schema.org/LocalBusiness">
+  <div class="post-content e-content">
+    {{ content }}
+  </div>
+</article>
