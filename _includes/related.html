@@ -1,0 +1,36 @@
+{%- comment -%}
+  "Keep reading" — up to 4 posts that share at least one tag with the current
+  post, newest first. Rendered by _layouts/post.html between the article body and
+  the product CTA to cut the ~96% single-page bounce: give every reader a next
+  click that stays on-site (more pages/visit = more CTA exposure). The block is
+  omitted entirely when no tag-matched post exists, so it never renders empty.
+{%- endcomment -%}
+{%- capture related_items -%}
+  {%- assign relatedCount = 0 -%}
+  {%- for post in site.posts -%}
+    {%- if post.url != page.url and relatedCount < 4 -%}
+      {%- assign common = 0 -%}
+      {%- for tag in post.tags -%}
+        {%- if page.tags contains tag -%}{%- assign common = common | plus: 1 -%}{%- endif -%}
+      {%- endfor -%}
+      {%- if common > 0 -%}
+        <li class="pe-related__item"><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></li>
+        {%- assign relatedCount = relatedCount | plus: 1 -%}
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- assign related_trimmed = related_items | strip -%}
+{%- if related_trimmed != "" -%}
+<nav class="pe-related" aria-label="Related articles">
+  <h2 class="pe-related__title">Keep reading</h2>
+  <ul class="pe-related__list">{{ related_items }}</ul>
+</nav>
+<style>
+.pe-related{margin:2.5rem 0 0;padding:1.25rem 1.5rem;border:1px solid #e3e6ea;border-radius:12px;background:#fbfcfd}
+.pe-related__title{margin:0 0 .6rem;font-size:1.05rem;letter-spacing:.01em}
+.pe-related__list{list-style:none;margin:0;padding:0;display:grid;gap:.4rem}
+.pe-related__item a{text-decoration:none;color:#2b6cb0;font-weight:600;line-height:1.35}
+.pe-related__item a:hover{text-decoration:underline}
+</style>
+{%- endif -%}
