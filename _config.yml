@@ -12,6 +12,11 @@ theme: minima
 # when this key is present, so it stays inert until a real ID is set here.
 # google_analytics: G-XXXXXXXXXX   # <- replace with the real ID, then uncomment
 
+# Google Search Console (HTML-tag verification): paste ONLY the content="" value
+# from the <meta name="google-site-verification"> tag GSC gives you. head.html
+# emits the tag site-wide when this is set. Inert until then.
+# google_site_verification: PASTE_CODE_HERE
+
 # Build settings
 markdown: kramdown
 permalink: /posts/:title/
