@@ -1,7 +1,7 @@
 ---
 title: "Best Plumbers in Los Angeles, CA — Licensed & Insured (2026)"
 description: "Find the best plumbers Los Angeles providers in Los Angeles, CA. Curated by AI, updated 2026."
-date: "2026-09-01"
+date: "2026-09-02"
 keywords: ["plumbers Los Angeles", "Los Angeles plumbers", "Los Angeles CA"]
 schema: |
   {
