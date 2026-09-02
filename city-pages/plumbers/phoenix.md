@@ -1,7 +1,7 @@
 ---
 title: "Best Plumbers in Phoenix, AZ — Licensed & Insured (2026)"
 description: "Find the best plumbers Phoenix providers in Phoenix, AZ. Curated by AI, updated 2026."
-date: "2026-09-01"
+date: "2026-09-02"
 keywords: ["plumbers Phoenix", "Phoenix plumbers", "Phoenix AZ"]
 schema: |
   {
