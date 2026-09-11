@@ -9,26 +9,46 @@ on:
       - main
   workflow_dispatch:
 
+permissions:
+  contents: read
+
+concurrency:
+  group: jekyll-production-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 12
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 2
 
-      - name: Block automated rewrites of published posts
+      - name: Block unreviewed rewrites of published posts
         if: github.event_name == 'push'
         run: |
+          set -euo pipefail
           if git rev-parse HEAD~1 >/dev/null 2>&1; then
-            rewrites="$(git diff --name-status HEAD~1 HEAD -- 'posts/*.md' | awk '$1 ~ /^M/ {print}')"
-            if [ -n "$rewrites" ]; then
-              echo "Published post rewrite blocked. Create a new reviewed post or set ALLOW_CONTENT_REWRITE=true only for an intentional manual correction."
+            rewrites="$(git diff --name-status HEAD~1 HEAD -- '_posts/*.md' | awk '$1 ~ /^M/ {print}')"
+            if [ -n "$rewrites" ] && [ "${ALLOW_CONTENT_REWRITE:-false}" != "true" ]; then
+              echo "Published post rewrite blocked. Corrections must be reviewed before main is updated."
               echo "$rewrites"
               exit 1
             fi
           fi
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Test article normalization
+        run: python -m unittest discover -s tests -v
+
+      - name: Enforce normalized articles
+        run: python scripts/normalize_articles.py --check _posts
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -37,10 +57,17 @@ jobs:
           bundler-cache: true
 
       - name: Build site
-        run: bundle exec jekyll build --strict_front_matter
+        env:
+          JEKYLL_ENV: production
+        run: bundle exec jekyll build --strict_front_matter --trace
 
       - name: Validate generated site
         run: |
-          test -f _site/index.html
-          test -f _site/sitemap.xml
-          test -f _site/feed.xml
+          set -euo pipefail
+          test -s _site/index.html
+          test -s _site/sitemap.xml
+          test -s _site/feed.xml
+          if grep -R -n -E '\\"(body|meta_description|slug)\\"[[:space:]]*:' _site/posts --include='*.html'; then
+            echo 'Serialized article payload leaked into generated HTML.' >&2
+            exit 1
+          fi
