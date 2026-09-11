@@ -2,32 +2,40 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
 
-  {%- comment -%} Google Search Console HTML-tag verification (set in _config.yml). {%- endcomment -%}
   {%- if site.google_site_verification -%}
-  <meta name="google-site-verification" content="{{ site.google_site_verification }}">
+  <meta name="google-site-verification" content="{{ site.google_site_verification | escape }}">
   {%- endif -%}
 
   {%- assign page_title = page.title | default: site.title -%}
-  {%- assign page_description = page.description | default: page.excerpt | default: site.description | strip_html | strip_newlines | normalize_whitespace | truncate: 160 -%}
+  {%- assign page_description = page.description | default: page.meta_description | default: page.excerpt | default: site.description | strip_html | strip_newlines | normalize_whitespace | truncate: 160 -%}
   {%- assign canonical_url = page.url | replace: 'index.html', '' | absolute_url | replace: 'https://alreadyherellc.com', 'https://www.alreadyherellc.com' -%}
-  {%- assign og_image = page.image | default: site.image | default: '/assets/og-default.png' | absolute_url | replace: 'https://alreadyherellc.com', 'https://www.alreadyherellc.com' -%}
+  {%- assign social_image = page.image | default: site.image -%}
+  {%- if social_image -%}
+    {%- assign social_image_url = social_image | absolute_url | replace: 'https://alreadyherellc.com', 'https://www.alreadyherellc.com' -%}
+  {%- endif -%}
 
   <title>{% if page.title %}{{ page_title | escape }} | {{ site.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
   <meta name="description" content="{{ page_description | escape }}">
-  <link rel="canonical" href="{{ canonical_url }}">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <link rel="canonical" href="{{ canonical_url | escape }}">
 
   <meta property="og:title" content="{{ page_title | escape }}">
   <meta property="og:description" content="{{ page_description | escape }}">
-  <meta property="og:url" content="{{ canonical_url }}">
+  <meta property="og:url" content="{{ canonical_url | escape }}">
   <meta property="og:site_name" content="{{ site.title | escape }}">
   <meta property="og:type" content="{% if page.date %}article{% else %}website{% endif %}">
-  <meta property="og:image" content="{{ og_image }}">
+  {%- if social_image_url %}
+  <meta property="og:image" content="{{ social_image_url | escape }}">
+  {%- endif %}
 
-  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:card" content="{% if social_image_url %}summary_large_image{% else %}summary{% endif %}">
   <meta name="twitter:title" content="{{ page_title | escape }}">
   <meta name="twitter:description" content="{{ page_description | escape }}">
-  <meta name="twitter:image" content="{{ og_image }}">
+  {%- if social_image_url %}
+  <meta name="twitter:image" content="{{ social_image_url | escape }}">
+  {%- endif %}
 
   <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
   {%- feed_meta -%}
