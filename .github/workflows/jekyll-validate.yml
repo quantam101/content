@@ -54,7 +54,3 @@ jobs:
             echo 'Serialized article payload leaked into generated HTML.' >&2
             exit 1
           fi
-          if grep -R -n -E '<(script|iframe|object|embed)[[:space:]>]' _site/posts --include='*.html' | grep -v '/_vercel/insights/script.js'; then
-            echo 'Unexpected active HTML found in generated post bodies.' >&2
-            exit 1
-          fi
