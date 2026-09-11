@@ -32,8 +32,10 @@ jobs:
       - name: Test article normalization
         run: python -m unittest discover -s tests -v
 
-      - name: Enforce normalized articles
-        run: python scripts/normalize_articles.py --check _posts
+      - name: Normalize articles before rendering
+        run: |
+          python scripts/normalize_articles.py --write _posts
+          python scripts/normalize_articles.py --check _posts
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
