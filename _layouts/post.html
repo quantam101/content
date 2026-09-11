@@ -1,27 +1,38 @@
 ---
 layout: default
 ---
-{%- comment -%}
-  Local override of minima 2.5's post layout. Faithful to the theme's markup so
-  styling is unchanged, with one addition: every post renders the owned-product
-  CTA (_includes/cta.html) after the article body. This gives all posts — the
-  existing back catalogue and every future post — a single, consistent
-  conversion path to the Already Here / Gumroad catalogue without editing each
-  post's markdown.
-{%- endcomment -%}
-<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+<article class="post h-entry" itemscope itemtype="https://schema.org/BlogPosting">
+  {%- assign words = content | number_of_words -%}
+  {%- assign minutes = words | divided_by: 220 -%}
+  {%- if minutes < 1 -%}{%- assign minutes = 1 -%}{%- endif -%}
 
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
+
     <p class="post-meta">
       <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
         {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
         {{ page.date | date: date_format }}
       </time>
+      <span aria-label="Estimated reading time">{{ minutes }} min read</span>
       {%- if page.author -%}
-        • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author }}</span></span>
+        <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+          <span class="p-author h-card" itemprop="name">{{ page.author | escape }}</span>
+        </span>
       {%- endif -%}
     </p>
+
+    {%- if page.description -%}
+      <p class="post-description" itemprop="description">{{ page.description | escape }}</p>
+    {%- endif -%}
+
+    {%- if page.tags and page.tags.size > 0 -%}
+      <div class="post-tags" aria-label="Article tags">
+        {%- for tag in page.tags -%}
+          <span class="post-tag">{{ tag | escape }}</span>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">
@@ -29,7 +40,6 @@ layout: default
   </div>
 
   {%- include related.html -%}
-
   {%- include cta.html -%}
 
   {%- if site.disqus.shortname -%}

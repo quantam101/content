@@ -1,45 +1,37 @@
 title: ProfitEngine Content
-description: AI-generated articles on passive income, SaaS tools, and online business
+description: Practical articles on passive income, SaaS tools, automation, IT operations, and online business
 baseurl: /content
 # Canonical domain: articles are served at www.alreadyherellc.com/content/*
-# via a Vercel rewrite in already-here-llc. The github.io copy canonicalizes
-# to the real domain so search authority consolidates there.
+# via the production site rewrite. Search authority consolidates on this domain.
 url: https://www.alreadyherellc.com
 theme: minima
+lang: en-US
 
-# Analytics: set a real GA4 measurement ID to activate site-wide tracking.
-# head.html loads _includes/google-analytics.html only in production AND only
-# when this key is present, so it stays inert until a real ID is set here.
-# google_analytics: G-XXXXXXXXXX   # <- replace with the real ID, then uncomment
-
-# Google Search Console (HTML-tag verification): paste ONLY the content="" value
-# from the <meta name="google-site-verification"> tag GSC gives you. head.html
-# emits the tag site-wide when this is set. Inert until then.
-# google_site_verification: PASTE_CODE_HERE
-
-# Build settings
 markdown: kramdown
 permalink: /posts/:title/
+future: false
+show_excerpts: true
 
-# Plugins
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
   - jekyll-paginate
 
-# Exclude files
 exclude:
+  - .github
+  - .alreadyhere
   - Gemfile
   - Gemfile.lock
+  - README.md
   - node_modules
+  - scripts
+  - tests
   - vendor
 
-# Pagination
 paginate: 10
 paginate_path: /page/:num/
 
-# Default front matter
 defaults:
   - scope:
       path: ""
@@ -47,18 +39,11 @@ defaults:
     values:
       layout: post
       author: ProfitEngine AI
-      image: https://www.alreadyherellc.com/content/assets/og-default.png
-  # city-pages/* local-SEO landers had no layout at all (bare markdown, no <head>,
-  # schema JSON-LD never emitted). Give them the city layout so they get full SEO
-  # head tags, canonical, analytics, and their structured data.
   - scope:
       path: "city-pages"
     values:
       layout: city
 
-# SEO
-twitter:
-  username: profitengine
 social:
   name: ProfitEngine
   links: []
