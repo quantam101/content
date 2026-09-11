@@ -2,19 +2,10 @@ title: ProfitEngine Content
 description: Practical articles on passive income, SaaS tools, automation, IT operations, and online business
 baseurl: /content
 # Canonical domain: articles are served at www.alreadyherellc.com/content/*
-# via a Vercel rewrite in already-here-llc. The github.io copy canonicalizes
-# to the real domain so search authority consolidates there.
+# via the production site rewrite. Search authority consolidates on this domain.
 url: https://www.alreadyherellc.com
 theme: minima
 lang: en-US
-timezone: America/Phoenix
-
-# Analytics is activated only when a real GA4 measurement ID is configured.
-# Never commit API secrets or service credentials to this static repository.
-# google_analytics: G-XXXXXXXXXX
-
-# Google Search Console HTML-tag verification content value.
-# google_site_verification: PASTE_CODE_HERE
 
 markdown: kramdown
 permalink: /posts/:title/
@@ -41,7 +32,6 @@ exclude:
 paginate: 10
 paginate_path: /page/:num/
 
-# Default front matter
 defaults:
   - scope:
       path: ""
@@ -49,15 +39,11 @@ defaults:
     values:
       layout: post
       author: ProfitEngine AI
-      image: https://www.alreadyherellc.com/content/assets/og-default.png
   - scope:
       path: "city-pages"
     values:
       layout: city
 
-# SEO identity
-twitter:
-  username: profitengine
 social:
   name: ProfitEngine
   links: []
