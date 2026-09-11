@@ -31,8 +31,18 @@ jobs:
 
       - name: Normalize and validate all articles
         run: |
-          python scripts/normalize_articles.py --write _posts
-          python scripts/normalize_articles.py --check _posts
+          set -o pipefail
+          python scripts/normalize_articles.py --write _posts 2>&1 | tee content-validation.log
+          python scripts/normalize_articles.py --check _posts 2>&1 | tee -a content-validation.log
+
+      - name: Preserve validation diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: content-validation-diagnostics
+          path: content-validation.log
+          if-no-files-found: ignore
+          retention-days: 7
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
