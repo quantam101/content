@@ -1,4 +1,4 @@
-name: Validate Jekyll Content
+name: Validate content and Jekyll build
 
 on:
   pull_request:
@@ -8,14 +8,29 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: content-validate-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  jekyll:
-    name: Build content site
+  validate:
+    name: Normalize, test, and build
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 12
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Test normalization boundary
+        run: python -m unittest discover -s tests -v
+
+      - name: Reject malformed or non-normalized articles
+        run: python scripts/normalize_articles.py --check _posts
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -23,5 +38,23 @@ jobs:
           ruby-version: '3.3'
           bundler-cache: true
 
-      - name: Validate front matter and build
+      - name: Build Jekyll with strict front matter
+        env:
+          JEKYLL_ENV: production
         run: bundle exec jekyll build --strict_front_matter --trace
+
+      - name: Verify required production artifacts
+        run: |
+          set -euo pipefail
+          test -s _site/index.html
+          test -s _site/sitemap.xml
+          test -s _site/feed.xml
+          test -s _site/posts/passive-income-stock-photos-2026/index.html
+          if grep -R -n -E '\\"(body|meta_description|slug)\\"[[:space:]]*:' _site/posts --include='*.html'; then
+            echo 'Serialized article payload leaked into generated HTML.' >&2
+            exit 1
+          fi
+          if grep -R -n -E '<(script|iframe|object|embed)[[:space:]>]' _site/posts --include='*.html' | grep -v '/_vercel/insights/script.js'; then
+            echo 'Unexpected active HTML found in generated post bodies.' >&2
+            exit 1
+          fi
