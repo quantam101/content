@@ -243,6 +243,18 @@ Google’s current Search Essentials continue to emphasize helpful, reliable, pe
 
 Official reference: [Google Search Essentials](https://developers.google.com/search/docs/essentials).
 
+## Sources
+
+- [Google Search Essentials](https://developers.google.com/search/docs/essentials)
+- [Google Image SEO best practices](https://developers.google.com/search/docs/appearance/google-images)
+- [Google Search Console Performance report](https://support.google.com/webmasters/answer/7576553)
+- [Google Search Console FAQ rich-result change, May 2026](https://support.google.com/webmasters/answer/6211453)
+- [Ahrefs Free features and limits](https://ahrefs.com/free)
+- [Screaming Frog SEO Spider crawl limits](https://www.screamingfrog.co.uk/seo-spider/user-guide/configuration/)
+- [Yoast SEO analysis features](https://yoast.com/features/seo-analysis/)
+- [AnswerThePublic](https://answerthepublic.com/)
+- [TinyPNG free web optimizer](https://tinypng.com/)
+
 ## Conclusion
 
 A strong free SEO stack in 2026 does not require a premium suite. Start with Google Search Console for real performance data, Google Trends for demand, Screaming Frog and Ahrefs Free for technical and backlink analysis, PageSpeed Insights for performance, and focused supporting tools such as Yoast, AnswerThePublic, TinyPNG, and Ubersuggest.
