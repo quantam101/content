@@ -1,53 +1,79 @@
 ---
 layout: default
-title: Free Printable Tech & Logic Activity Pack for Kids
-description: Free printable sample pack — pattern, logic, and coding-concept worksheets for kids ages 7-12. No signup required; print and use today.
+title: Free Sample — Little Engineers Technology & Logic Workbook
+description: A free CSTA-aligned sample unit from the Little Engineers workbook — objectives, activities at three levels, an exit ticket, and answer key. Print and teach, no signup required.
 permalink: /printables/
 ---
 
-# Free Printable Activity Pack — Tech & Logic for Kids 7–12
+# Free Sample — Little Engineers: Technology & Logic Workbook (Grades 3–8)
 
-A free sample from our *Little Engineers* activity packs: screen-free worksheets covering patterns, if-then logic, and early tech thinking. Print this page or open it on any device — no account, app, or email needed.
+This is a complete sample unit from our school-grade workbook — the same structure teachers get in the full product: learning objectives, vocabulary, a mini-lesson, three activity tiers, an exit ticket, an unplugged game, and the answer key with rationale. Print this page or use it on any device — no account or signup needed.
 
-> **Want more each week?** The newsletter below sends new printable activities and digital products as they're released.
+## Sample Unit — Patterns & Sequences (Ages 7–9)
 
-## Level 1 — Patterns (Ages 7–9)
+**You will learn to:**
 
-Finish each pattern. Write or draw what comes next.
+- Find the rule a pattern follows
+- Extend a pattern forward and backward
+- Build your own pattern and write its rule
+- Explain why computers love patterns
+
+**Key vocabulary:** *pattern* — something that repeats by a rule · *sequence* — items in order · *rule* — the instruction that makes the pattern · *algorithm* — steps that always work.
+
+**Mini-lesson.** A pattern is anything that repeats by a rule. Computers are pattern machines — they spot patterns in photos, music, and numbers faster than any person. The real skill is not guessing the next item; it is saying the RULE out loud. "Add 2" is a rule. "Bigger" is not. Work every problem the same way: (1) look at the first three items, (2) say what changed, (3) say the rule, (4) use the rule to continue.
+
+### Core — Find the rule
+
+Continue each pattern for two more items, then write the rule.
 
 1. Circle, square, circle, square, circle, ___, ___
-2. 2, 4, 6, 8, ___, ___
-3. A, B, A, B, A, ___, ___
-4. 5, 10, 15, ___, ___
-5. Red, red, blue, red, red, blue, ___, ___
-6. Make your own pattern with 6 items. Write the rule underneath.
+2. 2, 4, 6, 8, ___, ___ — Rule: ___
+3. A, B, C, A, B, C, ___, ___ — Rule: ___
+4. 5, 10, 15, 20, ___, ___ — Rule: ___
+5. Z, Y, X, Z, Y, X, ___, ___ — Rule: ___
+6. 100, 90, 80, ___, ___ — Rule: ___
+7. Draw your own 6-item pattern. Write its rule: ___
 
-## Level 2 — If-Then Logic (Ages 8–11)
+### Practice — Pattern detective
 
-1. IF it is raining outside, THEN ___
-2. IF the library book is due tomorrow, THEN ___
-3. IF the cookie jar is empty, THEN ___
-4. Write your own: IF ___, THEN ___
+One item in each row breaks the rule. Find it and fix it.
 
-**Robot challenge:** on a 4×4 grid, write a program using FORWARD, LEFT, RIGHT that takes the robot from START to the star. Then swap with a grown-up and find one bug in their program.
+1. 3, 6, 9, 11, 15 — broken: ___ fix: ___
+2. Mon, Tue, Wed, Fri, Thu — broken: ___ fix: ___
+3. 2, 4, 8, 16, 30 — broken: ___ fix: ___
+4. A pattern is 4, 8, 12, 16… Is 26 in it? Why or why not?
 
-## Level 3 — Tech Explainer (Ages 9–12)
+### Challenge — Grow it
 
-1. Label it: list the INPUT, PROCESSING, and OUTPUT for a toaster, then for a phone playing a video.
-2. Message chain: draw the path a text message takes from your phone to a friend's phone.
-3. Password check: which is the strong password — `password123`, `fluffy`, `K9!mangoTree-77`, `letmein` — and why?
-4. Bug hunt: a "get ready for school" program says *brush teeth, put on shoes, eat breakfast*. What is wrong with the order?
+1. Continue backward AND forward: ___, 7, 14, 21, ___
+2. Two rules at once: 1, 2, 4, 8, 16, ___ (each step doubles)
+3. Start with 1, 1 and use the rule "add the last two numbers." What are the next four?
+4. Explain why a computer can check 1,000 pattern rows in the time you check one.
 
-## Answer Key
+### Exit Ticket
 
-**Level 1:** 1) square, circle 2) 10, 12 3) B, A 4) 20, 25 5) red, red 6) any pattern with a stated rule — the child saying the rule is the win.
+1. State the rule for: 10, 20, 30, 40… ___
+2. What makes a good rule? ___
+3. One thing you can now do that a computer does too: ___
 
-**Level 2:** any sensible then-action counts; for the robot, a correct path with extra steps still passes.
+**Unplugged game — Pattern Claps.** Leader claps a pattern (clap, clap, stomp); the group continues it and must SAY the rule before continuing. Rotate leaders until everyone leads.
 
-**Level 3:** 1) toaster — input: bread + lever, processing: heating, output: toast; phone — input: tap, processing: decode, output: picture + sound. 2) phone → cell tower → servers → tower → friend's phone. 3) `K9!mangoTree-77` — long, mixed characters. 4) breakfast should come before brushing teeth.
+## Answer Key (with rationale)
+
+**Core:** 1) square, circle 2) 10, 12 — add 2 3) A, B — ABC repeats 4) 25, 30 — add 5 5) Z, Y — ZYX repeats 6) 70, 60 — subtract 10 7) any pattern with a stated rule.
+
+**Practice:** 1) 11→12 2) Fri and Thu swapped 3) 30→32 (doubles) 4) No — only multiples of 4 from 4 appear.
+
+**Challenge:** 1) 0 and 28 2) 32 3) 2, 3, 5, 8 — the Fibonacci sequence; naming it is a bonus talking point.
+
+Acceptable alternatives: in logic work, a different-but-defensible answer with a stated rule shows mastery — the rubric counts the reasoning, not the exact answer.
+
+## What's in the full workbook
+
+Six CSTA-aligned units (ages 7–14): patterns, algorithms & debugging, problem-solving puzzles, how computers & networks work, data & online safety, plus a teen extension on variables, loops and pseudocode. It ships with a facilitator guide (pacing, differentiation, standards table), a 4-point assessment rubric, a full answer key with rationale, a glossary, and a completion certificate — built for classrooms, homeschools, and enrichment programs.
 
 ---
 
 {% include newsletter-signup.html %}
 
-*More packs are in the works — join the newsletter above to get each one free as it drops.*
+*New printables and products drop first to the newsletter above.*
