@@ -18,3 +18,5 @@ Latest posts are published through the content automation pipeline and rendered 
 
 - [AI Receptionist Paid From Recovered Leads]({{ '/posts/ai-receptionist-paid-from-recovered-leads/' | relative_url }})
 - [Junk Removal Missed-Call Recovery]({{ '/posts/junk-removal-ai-receptionist-missed-call-recovery/' | relative_url }})
+
+{%- include newsletter-signup.html -%}
