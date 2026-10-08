@@ -48,4 +48,6 @@ Finish each pattern. Write or draw what comes next.
 
 ---
 
+{% include newsletter-signup.html %}
+
 *More packs are in the works — join the newsletter above to get each one free as it drops.*
