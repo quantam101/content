@@ -25,10 +25,16 @@
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var email = form.email.value.trim();
-      if (!email || !form.consent.checked) {
-        status.textContent = 'Enter your email and check the consent box.';
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        status.textContent = 'Enter a valid email address.';
         return;
       }
+      if (!form.consent.checked) {
+        status.textContent = 'Please check the consent box.';
+        return;
+      }
+      var button = form.querySelector('button[type="submit"]');
+      button.disabled = true;
       status.textContent = 'Subscribing…';
       fetch('https://app.alreadyherellc.com/api/newsletter/subscribe', {
         method: 'POST',
@@ -54,6 +60,9 @@
         })
         .catch(function () {
           status.textContent = 'Network error — try again later.';
+        })
+        .finally(function () {
+          button.disabled = false;
         });
     });
   })();
