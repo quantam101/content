@@ -45,7 +45,7 @@ Consistency is key. AI can help you generate high‑quality drafts, research, an
 * **Subject Lines** – Run A/B tests on AI‑generated subject lines to improve open rates.
 
 ### Practical Example
-For a newsletter on emerging tech, input “AI in fintech 2024” into the model. It returns a structured outline: 1) Market trends, 2) Case studies, 3) Investment outlook. You then flesh out each section, edit, and schedule.
+For a newsletter on emerging tech, input “AI in fintech 2026” into the model. It returns a structured outline: 1) Market trends, 2) Case studies, 3) Investment outlook. You then flesh out each section, edit, and schedule.
 
 ## 4. Design a Publishing Workflow
 A repeatable workflow reduces friction and ensures you meet deadlines.
