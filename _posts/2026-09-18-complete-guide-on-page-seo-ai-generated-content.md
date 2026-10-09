@@ -32,7 +32,7 @@ Insert the primary keyword naturally in the first 100 words, in at least one sub
 
 Search engines pull the title tag and meta description into the SERP snippet, so they must be compelling and keyword‑rich. An AI model can suggest a title, but you should refine it for click‑through rate (CTR) and length.
 
-**Title tag example**: "On‑Page SEO for AI‑Generated Content: A Complete 2024 Guide"
+**Title tag example**: "On‑Page SEO for AI‑Generated Content: A Complete 2026 Guide"
 
 **Meta description example** (155 characters): "Boost the rankings of AI‑written articles with proven on‑page SEO tactics—keyword research, structured data, internal linking, and speed tricks."
 
@@ -46,12 +46,12 @@ Schema markup tells search engines the exact nature of your content. For AI‑ge
 {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "On‑Page SEO for AI‑Generated Content: A Complete 2024 Guide",
+  "headline": "On‑Page SEO for AI‑Generated Content: A Complete 2026 Guide",
   "author": {
     "@type": "Person",
     "name": "Your Name"
   },
-  "datePublished": "2024-09-18",
+  "datePublished": "2026-09-18",
   "image": "https://example.com/cover.jpg",
   "keywords": "on‑page SEO, AI content, SEO checklist"
 }
