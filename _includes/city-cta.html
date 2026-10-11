@@ -1,0 +1,108 @@
+{%- comment -%}
+  Niche-aware conversion block for city-pages/* landers (rendered by
+  _layouts/city.html). Derives the niche from page.path
+  (city-pages/<niche>/<city>.md) — no per-page front matter needed.
+
+  Tech niches (it-support, ai-chatbots, automation-agency) sell the owned
+  service products (Smart Hands / Network Health / Infra assessment) plus a
+  contact CTA. Trade niches (plumbers, roofers, ...) sell the business tools —
+  a reader studying a ranking trades page is a business owner who wants leads.
+  Every link carries utm_campaign=city-cta + utm_content=<niche>-<city> so
+  conversions attribute to the exact page.
+{%- endcomment -%}
+{%- assign path_parts = page.path | split: "/" -%}
+{%- assign cta_niche = path_parts[1] | default: "local" -%}
+{%- assign cta_city = page.slug | default: path_parts[2] | split: "." | first -%}
+{%- assign utm = "utm_source=city-pages&utm_medium=cta&utm_campaign=city-cta&utm_content=" | append: cta_niche | append: "-" | append: cta_city -%}
+{%- assign tech_niches = "it-support,ai-chatbots,automation-agency" | split: "," -%}
+<aside class="city-cta" aria-label="Work with Already Here">
+  {%- if tech_niches contains cta_niche -%}
+  <h2 class="city-cta__title">Need this done, not just researched?</h2>
+  <p class="city-cta__lede">
+    Already Here LLC does the work — on-site Smart Hands, network health
+    checks, and infrastructure assessments across the Phoenix metro and
+    remotely nationwide.
+  </p>
+  <ul class="city-cta__grid">
+    {%- if cta_city == "phoenix" -%}
+    <li class="city-cta__card city-cta__card--feature">
+      <a href="https://alreadyhere.gumroad.com/l/iezxvf?{{ utm }}" rel="noopener">
+        <span class="city-cta__badge">On-site</span>
+        <span class="city-cta__name">Smart Hands — $400</span>
+        <span class="city-cta__desc">Field technician dispatched for hardware, rack, and cabling work.</span>
+      </a>
+    </li>
+    {%- else -%}
+    <li class="city-cta__card city-cta__card--feature">
+      <a href="https://alreadyherellc.com/contact?{{ utm }}" rel="noopener">
+        <span class="city-cta__badge">On-site</span>
+        <span class="city-cta__name">Smart Hands — $400</span>
+        <span class="city-cta__desc">Phoenix-metro dispatch only — request availability for your site.</span>
+      </a>
+    </li>
+    {%- endif -%}
+    <li class="city-cta__card">
+      <a href="https://alreadyhere.gumroad.com/l/rrnqyql?{{ utm }}" rel="noopener">
+        <span class="city-cta__name">Network Health Check — $750</span>
+        <span class="city-cta__desc">Full audit: topology, failure points, and a fix-first report.</span>
+      </a>
+    </li>
+    <li class="city-cta__card">
+      <a href="https://alreadyhere.gumroad.com/l/fyaryu?{{ utm }}" rel="noopener">
+        <span class="city-cta__name">Infrastructure Assessment — $1,500</span>
+        <span class="city-cta__desc">End-to-end environment review with a prioritized roadmap.</span>
+      </a>
+    </li>
+  </ul>
+  <p class="city-cta__foot">
+    <a class="city-cta__all" href="https://alreadyherellc.com/contact?{{ utm }}" rel="noopener">Request a quote →</a>
+  </p>
+  {%- else -%}
+  <h2 class="city-cta__title">Want customers finding you like this?</h2>
+  <p class="city-cta__lede">
+    This page ranks because the system behind it works — programmatic local
+    SEO plus automated content. Same engine, pointed at your business.
+  </p>
+  <ul class="city-cta__grid">
+    <li class="city-cta__card city-cta__card--feature">
+      <a href="https://alreadyhere.gumroad.com/l/fsbseb?{{ utm }}" rel="noopener">
+        <span class="city-cta__badge">Best value</span>
+        <span class="city-cta__name">Complete Automation Bundle</span>
+        <span class="city-cta__desc">Every kit — SEO, content, prompts, email, tracking — in one.</span>
+      </a>
+    </li>
+    <li class="city-cta__card">
+      <a href="https://alreadyhere.gumroad.com/l/azdev?{{ utm }}" rel="noopener">
+        <span class="city-cta__name">Programmatic SEO Starter Kit</span>
+        <span class="city-cta__desc">Publish hundreds of ranking city/service pages from a template.</span>
+      </a>
+    </li>
+    <li class="city-cta__card">
+      <a href="https://alreadyhere.gumroad.com/l/dyiyh?{{ utm }}" rel="noopener">
+        <span class="city-cta__name">Social Media Content Engine</span>
+        <span class="city-cta__desc">A week of local posts generated from one idea.</span>
+      </a>
+    </li>
+  </ul>
+  <p class="city-cta__foot">
+    <a class="city-cta__all" href="https://alreadyherellc.com/contact?{{ utm }}" rel="noopener">Ask us to run it for you →</a>
+  </p>
+  {%- endif -%}
+</aside>
+
+<style>
+.city-cta{margin:3rem 0 1rem;padding:1.75rem;border:1px solid #e3e6ea;border-radius:14px;background:#f7f9fb}
+.city-cta__title{margin:0 0 .35rem;font-size:1.3rem;line-height:1.25}
+.city-cta__lede{margin:0 0 1.1rem;color:#4a5157;font-size:.98rem}
+.city-cta__grid{list-style:none;margin:0;padding:0;display:grid;gap:.75rem;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.city-cta__card{margin:0}
+.city-cta__card a{display:block;height:100%;padding:.9rem 1rem;background:#fff;border:1px solid #e3e6ea;border-radius:10px;text-decoration:none;color:inherit;transition:border-color .15s ease,box-shadow .15s ease,transform .15s ease}
+.city-cta__card a:hover{border-color:#2b6cb0;box-shadow:0 4px 14px rgba(21,44,84,.10);transform:translateY(-1px)}
+.city-cta__card--feature a{border-color:#2b6cb0;background:#eef4fb}
+.city-cta__badge{display:inline-block;margin-bottom:.4rem;padding:.1rem .5rem;font-size:.68rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#fff;background:#2b6cb0;border-radius:999px}
+.city-cta__name{display:block;font-weight:700;font-size:1rem;line-height:1.25;margin-bottom:.25rem}
+.city-cta__desc{display:block;font-size:.86rem;color:#5a6169;line-height:1.4}
+.city-cta__foot{margin:1.1rem 0 .4rem}
+.city-cta__all{font-weight:600;text-decoration:none}
+.city-cta__all:hover{text-decoration:underline}
+</style>
