@@ -24,6 +24,7 @@
     remotely nationwide.
   </p>
   <ul class="city-cta__grid">
+    {%- if cta_city == "phoenix" -%}
     <li class="city-cta__card city-cta__card--feature">
       <a href="https://alreadyhere.gumroad.com/l/iezxvf?{{ utm }}" rel="noopener">
         <span class="city-cta__badge">On-site</span>
@@ -31,6 +32,15 @@
         <span class="city-cta__desc">Field technician dispatched for hardware, rack, and cabling work.</span>
       </a>
     </li>
+    {%- else -%}
+    <li class="city-cta__card city-cta__card--feature">
+      <a href="https://alreadyherellc.com/contact?{{ utm }}" rel="noopener">
+        <span class="city-cta__badge">On-site</span>
+        <span class="city-cta__name">Smart Hands — $400</span>
+        <span class="city-cta__desc">Phoenix-metro dispatch only — request availability for your site.</span>
+      </a>
+    </li>
+    {%- endif -%}
     <li class="city-cta__card">
       <a href="https://alreadyhere.gumroad.com/l/rrnqyql?{{ utm }}" rel="noopener">
         <span class="city-cta__name">Network Health Check — $750</span>
