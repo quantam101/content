@@ -35,6 +35,11 @@ jobs:
           python scripts/normalize_articles.py --write _posts 2>&1 | tee content-validation.log
           python scripts/normalize_articles.py --check _posts 2>&1 | tee -a content-validation.log
 
+      - name: Lint publishable content (slug dedup, stale years, front matter)
+        run: |
+          set -o pipefail
+          python scripts/lint_content.py _posts city-pages campaigns printables 2>&1 | tee -a content-validation.log
+
       - name: Preserve validation diagnostics
         if: failure()
         uses: actions/upload-artifact@v4

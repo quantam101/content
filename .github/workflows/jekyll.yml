@@ -37,6 +37,9 @@ jobs:
           python scripts/normalize_articles.py --write _posts
           python scripts/normalize_articles.py --check _posts
 
+      - name: Lint publishable content (slug dedup, stale years, front matter)
+        run: python scripts/lint_content.py _posts city-pages campaigns printables
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
