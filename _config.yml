@@ -28,6 +28,7 @@ exclude:
   - scripts
   - tests
   - vendor
+  - content-cycles
 
 paginate: 10
 paginate_path: /page/:num/
