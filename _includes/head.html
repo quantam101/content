@@ -18,7 +18,11 @@
 
   <title>{% if page.title %}{{ page_title | escape }} | {{ site.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
   <meta name="description" content="{{ page_description | escape }}">
+  {%- if page.noindex %}
+  <meta name="robots" content="noindex,follow">
+  {%- else %}
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  {%- endif %}
   <link rel="canonical" href="{{ canonical_url | escape }}">
 
   <meta property="og:title" content="{{ page_title | escape }}">

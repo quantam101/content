@@ -9,6 +9,8 @@ tags:
   - Business Networking
   - Network Infrastructure
 layout: post
+noindex: false
+sitemap: true
 ---
 
 ## Introduction to Cabling Options

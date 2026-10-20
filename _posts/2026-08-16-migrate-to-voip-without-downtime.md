@@ -9,6 +9,8 @@ tags:
   - telecom solutions
   - digital transformation
 layout: post
+noindex: false
+sitemap: true
 ---
 
 ## Introduction to VoIP Migration

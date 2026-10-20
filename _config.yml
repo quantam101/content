@@ -33,6 +33,18 @@ paginate: 10
 paginate_path: /page/:num/
 
 defaults:
+  # Indexing policy (2026-10-19): this site is indexed only for IT and
+  # field-service topics. Everything is noindex and out of the sitemap by
+  # default; on-topic pages opt in with `noindex: false` and `sitemap: true`.
+  - scope:
+      path: ""
+    values:
+      noindex: true
+      sitemap: false
+  - scope:
+      path: "ebooks/arizona-field-coverage-guide"
+    values:
+      sitemap: true
   - scope:
       path: ""
       type: posts

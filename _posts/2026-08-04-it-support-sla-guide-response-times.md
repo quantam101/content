@@ -8,6 +8,8 @@ tags:
   - Response Times
   - Technical Support
 layout: post
+noindex: false
+sitemap: true
 ---
 
 ## Introduction to IT Support SLA

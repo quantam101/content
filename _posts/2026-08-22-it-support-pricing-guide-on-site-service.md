@@ -8,6 +8,8 @@ tags:
   - On‑Site Service
   - IT Consulting
 layout: post
+noindex: false
+sitemap: true
 ---
 
 ## Introduction

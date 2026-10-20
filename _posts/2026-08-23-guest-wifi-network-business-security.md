@@ -8,6 +8,8 @@ tags:
   - Network Setup
   - Cybersecurity
 layout: post
+noindex: false
+sitemap: true
 ---
 
 ## 1. Understand the Risks of an Open Guest Network

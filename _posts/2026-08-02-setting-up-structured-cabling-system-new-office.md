@@ -9,6 +9,8 @@ tags:
   - network infrastructure
   - IT setup
 layout: post
+noindex: false
+sitemap: true
 ---
 
 ## Introduction to Structured Cabling Systems

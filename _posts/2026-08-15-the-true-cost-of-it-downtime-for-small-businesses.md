@@ -9,6 +9,8 @@ tags:
   - passive income
   - AI tools
 layout: post
+noindex: false
+sitemap: true
 ---
 
 ## Introduction to IT Downtime Costs

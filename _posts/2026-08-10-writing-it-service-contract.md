@@ -8,6 +8,8 @@ tags:
   - Business Protection
   - Dispute Resolution
 layout: post
+noindex: false
+sitemap: true
 ---
 
 ## Introduction to IT Service Contracts

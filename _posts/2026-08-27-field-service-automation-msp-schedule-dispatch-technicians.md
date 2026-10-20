@@ -9,6 +9,8 @@ tags:
   - Tech Management
   - Digital Automation
 layout: post
+noindex: false
+sitemap: true
 ---
 
 ## Introduction

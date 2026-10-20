@@ -29,6 +29,8 @@ schema: |
     },
     "mainEntityOfPage": "https://alreadyherellc.com/city-pages/it-support/phoenix"
   }
+noindex: false
+sitemap: true
 ---
 
 # Top IT Support Companies in Phoenix, AZ

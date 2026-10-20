@@ -8,6 +8,8 @@ tags:
   - network security
   - business technology
 layout: post
+noindex: false
+sitemap: true
 ---
 
 ## Introduction to Network Assessments
