@@ -1,7 +1,8 @@
 ---
 title: "Cloudflare Workers: Build and Deploy APIs at No Cost"
-description: "Learn how to create, test, and launch serverless APIs with Cloudflare Workers—free tier, step‑by‑step guide, trade‑offs, and comparison to other platforms."
+description: "Create, test, and ship a serverless API on Cloudflare Workers' free plan: current Wrangler commands, verified limits, trade-offs, and when to use something else."
 date: 2026-10-16
+last_modified_at: 2026-10-19
 tags:
   - cloudflare
   - serverless
@@ -10,123 +11,161 @@ tags:
 layout: post
 ---
 
-## Direct Value Proposition
-If you need an API that runs worldwide, scales automatically, and costs nothing for typical hobby or prototype traffic, Cloudflare Workers lets you write JavaScript (or other supported languages) and deploy it in seconds—no servers, no DevOps, no upfront fees.
+> **Updated October 19, 2026:** corrected plan limits, replaced retired Wrangler commands, and fixed the route configuration. All limits were checked against Cloudflare's documentation on this date.
 
-## What Are Cloudflare Workers?
-Cloudflare Workers is a **serverless compute platform** that runs code at the edge of Cloudflare’s global network. "Edge" means the code executes in data centers close to the end‑user, reducing latency. Workers are written in JavaScript, TypeScript, Rust, C, or Go, and are packaged as lightweight scripts (often under 1 MB). The platform isolates each request in a sandbox, so you cannot affect other users.
+## The short version
 
-## Why Choose Workers for APIs?
-* **Global latency reduction** – Requests are handled in the nearest Cloudflare POP (point of presence), often under 20 ms.
-* **Automatic scaling** – No capacity planning; Cloudflare adds capacity instantly as traffic spikes.
-* **Generous free tier** – The free plan covers many low‑to‑moderate workloads, making it ideal for prototypes, student projects, or side‑hustles.
-* **Built‑in security** – Workers run in a restricted environment, limiting exposure to OS‑level attacks.
-* **Easy integration** – You can attach a Worker directly to a domain, subdomain, or route pattern without configuring a separate load balancer.
+Cloudflare Workers runs your code in Cloudflare's data centers worldwide, scales automatically, and is free up to **100,000 requests per day**. For prototypes, internal tools, webhooks, and side projects, you can ship a production API without paying for a server.
 
-## Step‑by‑Step: Building a Simple JSON API
-Below is a concrete workflow that takes you from zero to a live API that returns a random joke.
+## What Workers are
 
-1. **Create a Cloudflare account** – Sign up at the official Cloudflare site ([https://cloudflare.com](https://cloudflare.com)). The free tier is sufficient for this tutorial.
-2. **Install Wrangler** – Wrangler is Cloudflare’s CLI tool.
-   ```bash
-   npm install -g @cloudflare/wrangler
-   ```
-3. **Generate a new project** – Run the template command.
-   ```bash
-   wrangler generate joke-api
-   cd joke-api
-   ```
-4. **Write the handler** – Edit `src/index.js`:
-   ```javascript
-   export default {
-     async fetch(request) {
-       const jokes = [
-         "Why do programmers hate nature? It has too many bugs.",
-         "I told my computer I needed a break, and it said \"No problem, I'll go to sleep.\"",
-         "Why did the API cross the road? To get to the other endpoint."
-       ];
-       const random = jokes[Math.floor(Math.random() * jokes.length)];
-       return new Response(JSON.stringify({ joke: random }), {
-         headers: { "content-type": "application/json" },
-       });
-     },
-   };
-   ```
-5. **Configure `wrangler.toml`** – Set the route where the API will live.
-   ```toml
-   name = "joke-api"
-   main = "src/index.js"
-   compatibility_date = "2024-01-01"
-   # Replace with your domain.
-   routes = [{ pattern = "myapp.com/api/joke", script = "joke-api" }]
-   ```
-6. **Publish** – Deploy with a single command.
-   ```bash
-   wrangler publish
-   ```
-7. **Test** – Open `https://myapp.com/api/joke` in a browser or curl.
-   ```bash
-   curl https://myapp.com/api/joke
-   ```
-   You should see a JSON object with a random joke.
+Workers is a serverless platform built on V8 isolates (the same engine as Chrome) rather than containers. Each request runs in a lightweight sandbox close to the user. Supported languages: JavaScript and TypeScript natively, Python (beta), and Rust/C/C++/Go via WebAssembly.
 
-## Managing Environment Variables and Secrets
-Sensitive data such as API keys should never be hard‑coded. Wrangler lets you store **secrets** that are injected at runtime.
+Because isolates start in milliseconds, Workers has no meaningful cold-start problem — and there is no paid "keep-warm" tier, because there's nothing to keep warm.
+
+## Free plan limits (verify before you build)
+
+| Limit | Free | Paid ($5/mo minimum) |
+|---|---|---|
+| Requests | 100,000/day (resets 00:00 UTC), 1,000/min burst | 10M/month included, then $0.30/M |
+| CPU time per request | **10 ms** | 30 s default, up to 5 min |
+| Subrequests (`fetch` calls) per request | 50 | 1,000 |
+| Durable Objects | SQLite-backed only, with daily limits | SQLite or KV-backed |
+
+Key point: **CPU time is not wall time.** Time spent waiting on `fetch()`, KV, or a database doesn't count. A Worker that calls an LLM API for 8 seconds may use under 5 ms of CPU. Most Workers use 1–2 ms.
+
+Source: [Workers limits](https://developers.cloudflare.com/workers/platform/limits/), [Workers pricing](https://developers.cloudflare.com/workers/platform/pricing/).
+
+## Build a JSON API in five steps
+
+### 1. Create the project
 
 ```bash
-wrangler secret put OPENAI_API_KEY
+npm create cloudflare@latest joke-api
+cd joke-api
 ```
-After entering the value, you can read it in your Worker with `env.OPENAI_API_KEY`. The secret is encrypted at rest and never exposed to the client.
 
-**Best practice** – Keep the secret name short, and avoid logging its value. If you need multiple keys, store them as separate secrets rather than a JSON blob; this makes rotation easier.
+Choose the "Hello World" Worker template. This installs Wrangler (Cloudflare's CLI) as a local dev dependency — no global install needed.
 
-## Performance, Scaling, and Cost Considerations
-| Aspect | Free Tier | Paid Tier |
-|--------|-----------|----------|
-| Request limit | Sufficient for small projects; typical free allowance covers many thousands of daily calls. | Higher limits and dedicated CPU‑time for heavy workloads. |
-| CPU time per request | Up to 50 ms of CPU per request (subject to change). | Up to 30 ms per request on the paid plan, with the ability to purchase additional CPU‑time. |
-| Custom domains | Supported via Cloudflare DNS. | Same, plus optional dedicated SSL certificates. |
-| Analytics | Basic request counts in the dashboard. | Detailed logs, latency breakdowns, and custom metrics. |
+> Old tutorials use `npm install -g @cloudflare/wrangler`, `wrangler generate`, and `wrangler publish`. All three are retired. Use `npm create cloudflare` and `wrangler deploy`.
 
-**Trade‑offs**
-* **Latency vs. Cold Starts** – Workers are instantiated on demand. For the free tier, the first request after a period of inactivity may experience a slight delay (often <100 ms). Paid plans can reduce this by keeping instances warm.
-* **CPU limits** – Complex calculations may exceed the free CPU budget, causing the request to be aborted with a `500` error. Break heavy work into smaller chunks or move it to a background queue (e.g., Cloudflare Queues).
-* **Data storage** – Workers KV (key‑value store) is free up to a modest quota, but reads have eventual consistency. For strong consistency, consider Durable Objects, which are free for low‑volume use but become billed beyond a threshold.
+### 2. Write the handler
 
-## Debugging, Testing, and Failure Modes
-### Local Development
-Wrangler provides a `wrangler dev` command that runs a local server mimicking the edge runtime. Use it to iterate quickly.
+`src/index.js`:
+
+```js
+const JOKES = [
+  "Why do programmers hate nature? It has too many bugs.",
+  "I told my computer I needed a break. It said: no problem, I'll go to sleep.",
+  "Why did the API cross the road? To get to the other endpoint.",
+];
+
+export default {
+  async fetch(request, env, ctx) {
+    const url = new URL(request.url);
+
+    if (url.pathname !== "/api/joke") {
+      return Response.json({ error: "not_found" }, { status: 404 });
+    }
+    if (request.method !== "GET") {
+      return Response.json({ error: "method_not_allowed" }, { status: 405 });
+    }
+
+    const joke = JOKES[Math.floor(Math.random() * JOKES.length)];
+    return Response.json({ joke }, {
+      headers: { "cache-control": "no-store" },
+    });
+  },
+};
+```
+
+### 3. Configure
+
+`wrangler.toml`:
+
+```toml
+name = "joke-api"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+
+[observability]
+enabled = true
+
+# Optional: serve on your own domain (domain must be on Cloudflare DNS).
+# Without this, you get https://joke-api.<your-subdomain>.workers.dev
+# routes = [{ pattern = "myapp.com/api/*", zone_name = "myapp.com" }]
+```
+
+Note the trailing `*` in the route pattern and the `zone_name` key — a pattern without a wildcard only matches that exact path.
+
+### 4. Run locally, then deploy
+
 ```bash
-wrangler dev
+npx wrangler dev      # local server at http://localhost:8787
+npx wrangler deploy   # live in seconds
 ```
-### Common Failure Modes
+
+### 5. Test
+
+```bash
+curl https://joke-api.<your-subdomain>.workers.dev/api/joke
+```
+
+## Secrets
+
+Never hard-code keys.
+
+```bash
+npx wrangler secret put OPENAI_API_KEY
+```
+
+Read it as `env.OPENAI_API_KEY`. Secrets are encrypted and never exposed to clients. For local dev, put values in a `.dev.vars` file and add it to `.gitignore`.
+
+Store each key as its own secret rather than one JSON blob — rotation is cleaner.
+
+## Storage options
+
+| Need | Use | Notes |
+|---|---|---|
+| Config, cache, read-heavy lookups | **Workers KV** | Eventually consistent; writes can take up to ~60 s to propagate globally |
+| Relational data | **D1** | Managed SQLite, free tier available |
+| Strong consistency, counters, rate limits, WebSockets | **Durable Objects** | SQLite-backed DOs are available on the free plan |
+| Files, images, backups | **R2** | S3-compatible, no egress fees |
+| Background or heavy work | **Queues** / **Cron Triggers** | Move anything CPU-heavy off the request path |
+
+## Debugging
+
 | Symptom | Likely cause | Fix |
-|---------|--------------|-----|
-| `500 Internal Server Error` with no logs | Exceeded CPU time or unhandled exception | Add `try/catch`, simplify logic, or move heavy work to a queue. |
-| `404 Not Found` on route | Route pattern mismatch in `wrangler.toml` | Verify the `routes` array matches the requested URL exactly. |
-| `403 Forbidden` when reading a secret | Secret not defined or wrong name | Run `wrangler secret list` and ensure you reference the correct variable. |
-| Slow response (>200 ms) | Cold start or network latency to origin | Warm the worker by sending periodic requests, or use a paid plan for reduced cold‑start time. |
-### Logging
-Use `console.log` inside your Worker; logs appear in the Cloudflare dashboard under **Workers → Logs**. For production debugging, send structured logs to an external service via HTTP, but be mindful of added latency.
+|---|---|---|
+| Error 1102 "Worker exceeded resource limits" | Over the CPU limit (10 ms on free) | Reduce CPU work, move it to a Queue, or upgrade |
+| Route returns origin page or 404 | Route pattern missing `/*` or wrong `zone_name` | Fix the pattern; confirm the domain is proxied through Cloudflare |
+| `env.MY_SECRET` is `undefined` | Secret not set, misspelled, or missing from `.dev.vars` locally | `npx wrangler secret list` |
+| Uncaught exception → 500 | Unhandled error | Wrap logic in `try/catch` and return a JSON error |
 
-## Comparison with Other Serverless Platforms
-When deciding whether Workers is the right tool, compare it against popular alternatives.
+**Logs:** run `npx wrangler tail` for live logs, or use Workers Logs in the dashboard (enabled by the `[observability]` block above). Never log secret values.
 
-| Feature | Cloudflare Workers | AWS Lambda@Edge | Vercel Serverless Functions |
-|---------|-------------------|----------------|-----------------------------|
-| Global edge execution | ✅ (200+ POPs) | ✅ (AWS edge locations) | ❌ (runs in regional zones) |
-| Free tier generosity | High – covers many hobby projects | Limited – free tier only for Lambda, not edge |
-| Language support | JS/TS, Rust, C, Go | JS/TS (Node.js) | JS/TS, Go, Python (via adapters) |
-| Cold‑start latency | Low (sub‑100 ms) | Higher (often >200 ms) | Moderate |
-| Built‑in KV store | ✅ Workers KV (eventual consistency) | ❌ Requires DynamoDB | ✅ Vercel KV (beta) |
-| Pricing model | Pay‑as‑you‑go after free tier | Pay per request + data transfer | Pay per execution, generous free tier |
+## Workers vs. alternatives
 
-**Takeaway** – If you need true edge proximity and a free tier that lets you ship an API without any cost, Workers is hard to beat. If you already rely on AWS services and need tight integration with other AWS resources, Lambda@Edge may make sense despite higher latency.
+| | Cloudflare Workers | AWS Lambda@Edge | Vercel Functions |
+|---|---|---|---|
+| Runs at the edge by default | Yes | Yes (CloudFront locations) | Regional by default |
+| Free tier | 100K req/day | No Lambda@Edge free tier | Hobby plan, non-commercial use |
+| Runtime model | V8 isolates | Containers | Containers (Fluid compute) |
+| Cold starts | Negligible | Noticeable | Reduced but present |
+| Languages | JS/TS, Python (beta), Wasm | Node.js, Python | Node.js, Python, Go, Ruby |
+| Built-in storage | KV, D1, R2, Durable Objects | Bring your own (DynamoDB, S3) | Marketplace integrations |
+
+**Pick Workers** when you want global low latency and a real free tier. **Pick Lambda** when you're already deep in AWS. **Pick Vercel** when the API lives alongside a Next.js frontend you already host there.
+
+Workers' main constraint is not Node.js: many Node APIs work with the `nodejs_compat` flag, but native modules and long CPU-bound jobs don't belong here.
+
+## Next step
+
+Add persistence: store submissions in D1 (relational) or a Durable Object (strongly consistent), then version your routes (`/api/v1/...`). Both fit inside the free plan while you collect real usage data.
 
 ## Sources
-- [Cloudflare Workers documentation](https://developers.cloudflare.com/workers/)
-- [Cloudflare Workers pricing page](https://www.cloudflare.com/products/workers/)
-- [Google Search Central blog](https://developers.google.com/search/blog)
 
-## Evidence‑Based Takeaway and Next Workflow Step
-Cloudflare Workers provides a frictionless path to launch globally distributed APIs without upfront expense. By following the step‑by‑step workflow above, you can have a functional endpoint in minutes, keep secrets safe, and monitor performance from the dashboard. The next logical step is to add persistence—store user submissions in Workers KV or Durable Objects—and expand the API with versioned routes. This incremental approach lets you stay within the free tier while gaining real‑world feedback before scaling.
+- [Cloudflare Workers limits](https://developers.cloudflare.com/workers/platform/limits/)
+- [Cloudflare Workers pricing](https://developers.cloudflare.com/workers/platform/pricing/)
+- [Durable Objects](https://developers.cloudflare.com/durable-objects/)
+- [Wrangler commands](https://developers.cloudflare.com/workers/wrangler/commands/)
