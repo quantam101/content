@@ -8,6 +8,8 @@ tags:
   - help desk solutions
   - small business IT
 layout: post
+noindex: false
+sitemap: true
 ---
 
 ## Introduction to IT Ticketing Systems for Small MSPs

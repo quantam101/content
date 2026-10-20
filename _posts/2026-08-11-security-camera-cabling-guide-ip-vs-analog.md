@@ -8,6 +8,8 @@ tags:
   - analog cameras
   - commercial building security
 layout: post
+noindex: false
+sitemap: true
 ---
 
 ## Introduction to Security Camera Cabling

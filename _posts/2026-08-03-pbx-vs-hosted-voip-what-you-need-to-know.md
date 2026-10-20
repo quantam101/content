@@ -9,6 +9,8 @@ tags:
   - Business Phone Solutions
   - Unified Communications
 layout: post
+noindex: false
+sitemap: true
 ---
 
 ## Introduction to PBX and Hosted VoIP

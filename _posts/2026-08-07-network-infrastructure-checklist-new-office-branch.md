@@ -8,6 +8,8 @@ tags:
   - IT planning
   - cybersecurity
 layout: post
+noindex: false
+sitemap: true
 ---
 
 ## Introduction to Network Infrastructure Planning

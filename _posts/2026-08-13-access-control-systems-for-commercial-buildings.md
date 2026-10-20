@@ -8,6 +8,8 @@ tags:
   - security solutions
   - building management
 layout: post
+noindex: false
+sitemap: true
 ---
 
 ## Introduction to Access Control Systems

@@ -8,6 +8,8 @@ tags:
   - Audio-Visual
   - Digital Automation
 layout: post
+noindex: false
+sitemap: true
 ---
 
 ## Understanding Your Space

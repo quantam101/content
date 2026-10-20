@@ -9,6 +9,8 @@ tags:
   - network optimization
   - digital automation
 layout: post
+noindex: false
+sitemap: true
 ---
 
 ## Introduction to Network Troubleshooting

@@ -9,6 +9,8 @@ tags:
   - building management
   - facility maintenance
 layout: post
+noindex: false
+sitemap: true
 ---
 
 ## Introduction to Low-Voltage Wiring and Its Importance

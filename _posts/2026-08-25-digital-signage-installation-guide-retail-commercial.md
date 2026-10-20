@@ -8,6 +8,8 @@ tags:
   - commercial installation
   - visual communication
 layout: post
+noindex: false
+sitemap: true
 ---
 
 ## Introduction: Why Digital Signage Matters in Retail and Commercial Environments

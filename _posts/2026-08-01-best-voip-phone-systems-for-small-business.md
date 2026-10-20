@@ -8,6 +8,8 @@ tags:
   - communication solutions
   - cloud-based phone systems
 layout: post
+noindex: false
+sitemap: true
 ---
 
 ## Introduction to VoIP Phone Systems for Small Business
