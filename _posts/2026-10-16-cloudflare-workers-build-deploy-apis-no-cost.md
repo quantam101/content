@@ -21,7 +21,7 @@ Cloudflare Workers runs your code in Cloudflare's data centers worldwide, scales
 
 Workers is a serverless platform built on V8 isolates (the same engine as Chrome) rather than containers. Each request runs in a lightweight sandbox close to the user. Supported languages: JavaScript and TypeScript natively, Python (beta), and Rust/C/C++/Go via WebAssembly.
 
-Because isolates start in milliseconds, Workers has no meaningful cold-start problem — and there is no paid "keep-warm" tier, because there's nothing to keep warm.
+Because isolates start in milliseconds, Workers has no meaningful cold-start problem, and no plan charges extra to avoid one.
 
 ## Free plan limits (verify before you build)
 
@@ -47,7 +47,7 @@ cd joke-api
 
 Choose the "Hello World" Worker template. This installs Wrangler (Cloudflare's CLI) as a local dev dependency — no global install needed.
 
-> Old tutorials use `npm install -g @cloudflare/wrangler`, `wrangler generate`, and `wrangler publish`. All three are retired. Use `npm create cloudflare` and `wrangler deploy`.
+> Older tutorials install the Wrangler v1 package globally and use its `generate` and `publish` subcommands. Those are retired. Use `npm create cloudflare` to scaffold and `wrangler deploy` to ship.
 
 ### 2. Write the handler
 
@@ -122,6 +122,16 @@ npx wrangler secret put OPENAI_API_KEY
 Read it as `env.OPENAI_API_KEY`. Secrets are encrypted and never exposed to clients. For local dev, put values in a `.dev.vars` file and add it to `.gitignore`.
 
 Store each key as its own secret rather than one JSON blob — rotation is cleaner.
+
+## Protecting the endpoint
+
+A public URL gets scanned within hours. Three cheap defenses cover most cases:
+
+- **Restrict CORS.** Return `Access-Control-Allow-Origin` only for your own site's origin instead of `*`, and answer `OPTIONS` preflight requests explicitly.
+- **Rate-limit per client.** Workers has a Rate Limiting binding (Wrangler 4.36+): declare a `[[ratelimits]]` block in `wrangler.toml`, then call `const { success } = await env.MY_LIMITER.limit({ key: ip })` before doing any work. Check your plan's availability first. Counters in D1 or a Durable Object work on every plan, including Free.
+- **Validate input.** Check `Content-Type`, cap body size, and reject unknown fields before anything touches a database or a paid API. For public forms, add Cloudflare Turnstile and verify the token server-side.
+
+Each of these costs a fraction of a millisecond of CPU, so they fit comfortably inside the free plan's 10 ms budget.
 
 ## Storage options
 
