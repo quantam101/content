@@ -88,15 +88,15 @@ name = "joke-api"
 main = "src/index.js"
 compatibility_date = "2026-10-01"
 
-[observability]
-enabled = true
-
 # Optional: serve on your own domain (domain must be on Cloudflare DNS).
 # Without this, you get https://joke-api.<your-subdomain>.workers.dev
 # routes = [{ pattern = "myapp.com/api/*", zone_name = "myapp.com" }]
+
+[observability]
+enabled = true
 ```
 
-Note the trailing `*` in the route pattern and the `zone_name` key — a pattern without a wildcard only matches that exact path.
+Keep `routes` above any `[table]` header: in TOML, every key after a header belongs to that table, so a `routes` line placed under `[observability]` would be ignored as a route. Note the trailing `*` in the pattern and the `zone_name` key — a pattern without a wildcard only matches that exact path.
 
 ### 4. Run locally, then deploy
 
