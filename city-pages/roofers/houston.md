@@ -1,7 +1,7 @@
 ---
 title: "Best Roofers in Houston, TX — Top-Rated Roofing Companies (2026)"
 description: "Find the best roofers Houston providers in Houston, TX. Curated by AI, updated 2026."
-date: "2026-10-22"
+date: "2026-10-23"
 keywords: ["roofers Houston", "Houston roofers", "Houston TX"]
 schema: |
   {
