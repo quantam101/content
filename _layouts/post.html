@@ -16,7 +16,7 @@ layout: default
       </time>
       <span aria-label="Estimated reading time">{{ minutes }} min read</span>
       {%- if page.author -%}
-        <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+        <span itemprop="author" itemscope itemtype="https://schema.org/Organization">
           <span class="p-author h-card" itemprop="name">{{ page.author | escape }}</span>
         </span>
       {%- endif -%}
