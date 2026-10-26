@@ -1,22 +1,20 @@
 ---
 layout: home
-title: ProfitEngine Content
+title: IT Infrastructure & Field Service Guides
+description: Practical guides from Already Here LLC on managed IT, structured cabling, VoIP, network troubleshooting and onsite IT field service in Phoenix and across Arizona.
 ---
 
-# ProfitEngine Content
+# IT Infrastructure & Field Service Guides
 
-AI-generated articles on passive income, SaaS tools, automation, and online business.
+Practical, vendor-neutral guides from Already Here LLC — a Phoenix managed IT and onsite field operations company — on cabling, networks, VoIP, SLAs and getting technicians onsite when remote support can't close the ticket.
 
-Latest posts are published through the content automation pipeline and rendered through GitHub Pages.
+## Start here
 
-## Active Campaigns
+- [The Arizona Field Coverage Buyer's Guide]({{ '/ebooks/arizona-field-coverage-guide/' | relative_url }})
+- [IT Support SLA Guide: What Response Times Should Your Contract Guarantee?]({{ '/posts/it-support-sla-guide-response-times/' | relative_url }})
+- [Local IT Field Service Company vs a National MSP]({{ '/posts/local-it-field-service-company-vs-national-msp/' | relative_url }})
+- [Network Infrastructure Checklist for a New Office or Branch]({{ '/posts/network-infrastructure-checklist-new-office-branch/' | relative_url }})
 
-- [AI Receptionist Lead Recovery Campaign]({{ '/campaigns/ai-receptionist-lead-recovery/' | relative_url }})
-- [Junk Removal Missed-Call Recovery Campaign]({{ '/campaigns/junk-removal-missed-call-recovery/' | relative_url }})
-
-## Latest Owned Content
-
-- [AI Receptionist Paid From Recovered Leads]({{ '/posts/ai-receptionist-paid-from-recovered-leads/' | relative_url }})
-- [Junk Removal Missed-Call Recovery]({{ '/posts/junk-removal-ai-receptionist-missed-call-recovery/' | relative_url }})
+Need a technician in Arizona? [Request onsite dispatch](https://www.alreadyherellc.com/dispatch) or call (602) 882-2920.
 
 {%- include newsletter-signup.html -%}

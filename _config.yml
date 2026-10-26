@@ -1,5 +1,7 @@
-title: ProfitEngine Content
-description: Practical articles on passive income, SaaS tools, automation, IT operations, and online business
+title: Already Here LLC
+description: Practical guides on managed IT, network infrastructure, cabling, VoIP and onsite IT field service from Already Here LLC in Phoenix, Arizona
+# Default share preview (rendered by the main site's app/opengraph-image.tsx)
+image: https://www.alreadyherellc.com/opengraph-image
 baseurl: /content
 # Canonical domain: articles are served at www.alreadyherellc.com/content/*
 # via the production site rewrite. Search authority consolidates on this domain.
@@ -50,12 +52,12 @@ defaults:
       type: posts
     values:
       layout: post
-      author: ProfitEngine AI
+      author: Already Here LLC
   - scope:
       path: "city-pages"
     values:
       layout: city
 
 social:
-  name: ProfitEngine
+  name: Already Here LLC
   links: []

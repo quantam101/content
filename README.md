@@ -1,6 +1,6 @@
-# ProfitEngine Content
+# Already Here LLC Content
 
-Public Jekyll content site for ProfitEngine articles.
+Public Jekyll content site for Already Here LLC guides, served at www.alreadyherellc.com/content.
 
 ## Purpose
 
