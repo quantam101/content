@@ -7,6 +7,10 @@ baseurl: /content
 # via the production site rewrite. Search authority consolidates on this domain.
 url: https://www.alreadyherellc.com
 theme: minima
+# Top nav shows only the guides hub. Without this, minima lists every page
+# (generated city pages, campaigns, printables) on every article.
+header_pages:
+  - index.md
 lang: en-US
 
 markdown: kramdown
