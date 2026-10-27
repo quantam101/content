@@ -7,6 +7,8 @@ baseurl: /content
 # via the production site rewrite. Search authority consolidates on this domain.
 url: https://www.alreadyherellc.com
 theme: minima
+# GA4 (same property as www.alreadyherellc.com) so /content pages are measured.
+google_analytics: G-X8SJOT22HM
 # Top nav shows only the guides hub. Without this, minima lists every page
 # (generated city pages, campaigns, printables) on every article.
 header_pages:
@@ -57,10 +59,6 @@ defaults:
     values:
       layout: post
       author: Already Here LLC
-  - scope:
-      path: "city-pages"
-    values:
-      layout: city
 
 social:
   name: Already Here LLC
