@@ -78,4 +78,3 @@ Bundling reduces the perceived cost per service and locks in recurring revenue.
 
 ## 7. Conclusion and Call to Action
 Pricing on‑site IT support isn’t a guessing game—it’s a data‑driven decision. By factoring labor, skill, travel, and market rates, you can set a fair, competitive price that protects your profit margin while delivering value. Start building your own pricing guide today: assess your costs, research local rates, and craft a clear, tiered pricing structure. If you need help refining your rates or creating a bundled service menu, contact us for a free audit of your current pricing model. Let’s turn your expertise into sustainable revenue.
-
