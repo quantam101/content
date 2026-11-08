@@ -106,4 +106,4 @@ Conduct penetration tests or use automated tools to scan for open ports, weak SS
 
 A well‑configured guest Wi‑Fi network protects your business, satisfies customers, and keeps your core services running smoothly. Start by isolating traffic with a dedicated VLAN, enforce strong authentication, limit bandwidth, and layer in firewall rules. Regularly update firmware and audit your setup to stay ahead of threats.
 
-**Take action today**: audit your current guest network, identify gaps, and implement the steps above. If you need help configuring VLANs, captive portals, or firewall rules, contact a trusted network security partner or consult our free guide on setting up a secure guest Wi‑Fi. Your business and your customers deserve a safe, reliable connection. 
+**Take action today**: audit your current guest network, identify gaps, and implement the steps above. If you need help configuring VLANs, captive portals, or firewall rules, contact a trusted network security partner or consult our free guide on setting up a secure guest Wi‑Fi. Your business and your customers deserve a safe, reliable connection.

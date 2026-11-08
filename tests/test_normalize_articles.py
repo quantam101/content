@@ -51,6 +51,15 @@ class NormalizeArticlesTests(unittest.TestCase):
         self.assertIn("Last partial sentence", output)
         self.assertNotIn(r"\n\n", output)
 
+    def test_truncated_envelope_preserves_markdown_table(self):
+        payload = r'{"title":"Recovered","body":"| A | B |\n|---|---|\n| 1 | 2 |\n\nPartial sentence'
+        output, changed = self.normalize(payload)
+        self.assertTrue(changed)
+        self.assertIn("| A | B |", output)
+        self.assertIn("| 1 | 2 |", output)
+        self.assertIn("Partial sentence", output)
+        self.assertNotIn('"body":', output)
+
     def test_double_encoded_json_is_unwrapped(self):
         payload = r'"{\"title\":\"Nested\",\"body\":\"Hello\\n\\nWorld\"}"'
         output, changed = self.normalize(payload)
